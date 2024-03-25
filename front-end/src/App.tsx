@@ -64,7 +64,7 @@ const App = () => {
     } else {
       setUserEthBalance(null); // Reset user balance if not connected to Linea or account is not set
     }
-  }, [connectToLinea, account]);
+  }, [connectToLinea, account, network]);
 
 
   return (
