@@ -9,7 +9,7 @@ const LINEA_NETWORKS = {
 
 const App = () => {
   const [account, setAccount] = useState<string>();
-  const [connectToLinea, setConenctedToLinea] = useState<boolean>();
+  const [connectToLinea, setConnectedToLinea] = useState<boolean>();
   const { sdk, connected, connecting, provider, chainId } = useSDK();
 
   const connectToMetamaskProvider = useCallback(async () => {
@@ -19,11 +19,10 @@ const App = () => {
     } catch (err) {
       console.warn("failed to connect..", err);
     }
-  }, [sdk, setAccount]);
+  }, [sdk]);
 
   useEffect(() =>
-    setConenctedToLinea(Object.keys(LINEA_NETWORKS).includes(chainId ?? ''))
-
+    setConnectedToLinea(Object.keys(LINEA_NETWORKS).includes(chainId ?? ''))
     , [chainId, connected]
   )
 
@@ -34,32 +33,29 @@ const App = () => {
       </button>
       <div style={{ padding: 10, margin: 10 }}>
         {connectToLinea ? (
-          <div >
-            <>
-              {`Connected chain: ${chainId === Object.keys(LINEA_NETWORKS)[0] ? Object.values(LINEA_NETWORKS)[0] : Object.values(LINEA_NETWORKS)[1]}`}
-              <p></p>
-              {account ? `Connected account: ${account}` : 'Please, click on Connect button'}
-            </>
-          </div>
-        ) :
-          (connected ?
-            <div>
-              You're on the wrong on Linea or Linea Goerli Network. Please, swith to one of these two.
-            </div>
-            :
-            <div>
-              Please, connect your wallet to either Linea or Linea Goerli network
-            </div>
-          )
-        }
+          <>
+            <div>{`Connected chain: ${Object.keys(LINEA_NETWORKS) ? Object.values(LINEA_NETWORKS)[0] : Object.values(LINEA_NETWORKS)[1]}`}</div>
+            <p />
+            <div>{account ? `Connected account: ${account}` : 'Please, click on Connect button'}</div>
+          </>
+        ) : connected ? (
+          <div>You're on the wrong network. Please switch to Linea or Linea Goerli.</div>
+        ) : (
+          <div>Please connect your wallet to either Linea or Linea Goerli network.</div>
+        )}
       </div>
-      {connectToLinea && account &&
-        <button style={{ padding: 10, margin: 10 }} onClick={() => console.log(() => 'asdf')}>
-          Get address details
-        </button>
-      }
+      {connectToLinea && account && (
+        <div style={{ padding: 10, margin: 10 }}>
+          <div>Network details: the gasPrice is 1 WEI</div>
+          <p />
+          <div>User balance is 0.1 ETH</div>
+          <p />
+          <div>User has 5 NFTs</div>
+        </div>
+      )}
     </div>
   );
 };
+
 
 export default App;
