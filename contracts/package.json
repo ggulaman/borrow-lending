@@ -1,0 +1,32 @@
+{
+  "name": "contracts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:typecheck": "npx hardhat test --typecheck",
+    "test": "npx hardhat test",
+    "compile": "npx hardhat compile",
+    "deploy:protocolERC721:localhost": "npx hardhat ignition deploy ./ignition/modules/ProtocolERC721.ts --network localhost --show-stack-traces",
+    "deploy:protocolERC20:localhost": "npx hardhat ignition deploy ./ignition/modules/ProtocolERC20.ts --network localhost --show-stack-traces",
+    "deploy:all:localhost": "npm run deploy:localhost && npm run deploy:protocolERC721:localhost && npm run deploy:protocolERC20:localhost",
+    "deploy:protocolERC721:sepolia": "npx hardhat ignition deploy ./ignition/modules/ProtocolERC721.ts --network sepolia --show-stack-traces",
+    "deploy:protocolERC20:sepolia": "npx hardhat ignition deploy ./ignition/modules/ProtocolERC20.ts --network sepolia --show-stack-traces",
+    "deploy:all:sepolia": "npm run deploy:sepolia && npm run deploy:protocolERC721:sepolia && npm run deploy:protocolERC20:sepolia",
+    "deploy:localhost": "npx hardhat ignition deploy ./ignition/modules/LendingBorrowingERC721.ts --network localhost --show-stack-traces",
+    "deploy:sepolia": "npx hardhat ignition deploy ./ignition/modules/LendingBorrowingERC721.ts --network sepolia --show-stack-traces",
+    "deploy:linea_goerli": "npx hardhat ignition deploy ./ignition/modules/LendingBorrowingERC721.ts --network linea_goerli --show-stack-traces",
+    "clean": "rm -rf ./artifacts ./typechain-typs ./cache"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.22.3"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.2",
+    "dotenv": "^16.4.5"
+  }
+}
