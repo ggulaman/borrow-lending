@@ -13,6 +13,11 @@ This repo is currently deployed on https://borrow-lending.netlify.app/ using:
 - netlify.com to deploy the front-end
 - render.io to deploy the back-end
 
+The addresses of the smart contracts in Sepolia Network are:
+- ERC20 token borrowed by users: **0xD3E51288aBF278feE0DaB592958B94b7360fB7A8**
+- ERC721 tokens used as collateral by users: **0xC86B41f4612E9edc2d86074F99aB565E9803c685**
+- Lending / Borrowing smart contract: **0x080D4568F8B1E028F9CdaeE8f472ae702D365b56**
+
 # Front-end
 It's a react web app using Typescript, supported by:
 - Metamask SDK, to easily connect Metamask to the dApp
