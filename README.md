@@ -17,6 +17,10 @@ This repo is currently deployed on https://borrow-lending.netlify.app/ using:
 It's a react web app using Typescript, supported by:
 - Metamask SDK, to easily connect Metamask to the dApp
 - Axios to handle the HTTP request
-
+- ethers.js to interact with the smart contracts
+  
 # Back-end
 It's a Nest Typescript app, connected to an Infura Node, which pulls data from the blockchain.
+
+# Smart Contracts
+Written in solidity and using hardhat to support the development.
