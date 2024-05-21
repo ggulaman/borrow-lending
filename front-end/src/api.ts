@@ -1,16 +1,16 @@
 import axios from 'axios';
 
-export const fetchUserBalance = async (userAddress: string, network: 'sepolia' | 'linea-goerli'): Promise<any> => {
+export const fetchUserBalance = async (userAddress: string, network: 'sepolia' | 'linea-sepolia'): Promise<any> => {
   const response = await axios.get(`${process.env.REACT_APP_API_ENDPOINT}/balance/${network}/${userAddress}`);
   return response.data;
 };
 
-export const fetchUserERC20Balance = async (userAddress: string, network: 'sepolia' | 'linea-goerli', tokenContractAddress: string): Promise<any> => {
+export const fetchUserERC20Balance = async (userAddress: string, network: 'sepolia' | 'linea-sepolia', tokenContractAddress: string): Promise<any> => {
   const response = await axios.get(`${process.env.REACT_APP_API_ENDPOINT}/ERC20balance/${network}/${userAddress}/${tokenContractAddress}`);
   return response.data;
 };
 
-export const fetchUserERC721Balance = async (userAddress: string, network: 'sepolia' | 'linea-goerli', tokenContractAddress: string): Promise<any> => {
+export const fetchUserERC721Balance = async (userAddress: string, network: 'sepolia' | 'linea-sepolia', tokenContractAddress: string): Promise<any> => {
   const response = await axios.get(`${process.env.REACT_APP_API_ENDPOINT}/ERC721balance/${network}/${userAddress}/${tokenContractAddress}`);
   return response.data;
 };

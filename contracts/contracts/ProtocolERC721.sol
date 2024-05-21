@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 
 contract ProtocolERC721 is ERC721Enumerable {
-    uint256 public constant MAX_TOKENS = 27;
+    uint256 public constant MAX_TOKENS = 300;
     uint256 private _tokenCount;
     mapping(address => bool) private _hasMinted;
 

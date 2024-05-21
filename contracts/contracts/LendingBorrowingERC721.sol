@@ -18,7 +18,7 @@ contract LendingBorrowingERC721 is ERC721Holder {
      */
     IERC721Enumerable public alphabetCollection; // ERC721 collection contract
     IERC20 public erc20Token; // ERC20 token contract
-    uint256 public tokenAmount = 100; // Amount of ERC20 tokens to be swapped for each ERC721 token
+    uint256 public tokenAmount = 500000000000000000; // Amount of ERC20 tokens to be swapped for each ERC721 token
 
     /*
      * @dev Mapping to track deposited tokens by user
@@ -53,25 +53,18 @@ contract LendingBorrowingERC721 is ERC721Holder {
         uint256 tokenCount = alphabetCollection.balanceOf(msg.sender);
         // Ensure user has at least one ERC721 token
         require(tokenCount > 0, "No tokens to swap");
+        
+        uint256 tokenId = alphabetCollection.tokenOfOwnerByIndex(msg.sender, 0);
+        
+        // Transfer ERC721 token to the contract
+        alphabetCollection.safeTransferFrom(msg.sender, address(this), tokenId);
+        // Transfer ERC20 tokens to the user
+        erc20Token.safeTransfer(msg.sender, tokenAmount);
+        // Record the deposited token
+        depositedTokens[msg.sender] = tokenId +1;
+        // Emit an event
+        emit TokensSwapped(msg.sender, tokenId);
 
-        // Loop through the user's ERC721 tokens
-        for (uint256 i = 0; i < tokenCount; i++) {
-            uint256 tokenId = alphabetCollection.tokenOfOwnerByIndex(msg.sender, i);
-            // Check if the user owns the token
-            if (alphabetCollection.ownerOf(tokenId) == msg.sender) {
-                // Transfer ERC721 token to the contract
-                alphabetCollection.safeTransferFrom(msg.sender, address(this), tokenId);
-                // Transfer ERC20 tokens to the user
-                erc20Token.safeTransfer(msg.sender, tokenAmount);
-                // Record the deposited token
-                depositedTokens[msg.sender] = tokenId +1;
-                // Emit an event
-                emit TokensSwapped(msg.sender, tokenId);
-                return;
-            }
-        }
-        // Revert if no eligible tokens are found
-        revert("No eligible tokens found");
     }
 
     /*

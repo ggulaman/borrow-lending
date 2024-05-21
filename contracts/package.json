@@ -16,6 +16,7 @@
     "deploy:localhost": "npx hardhat ignition deploy ./ignition/modules/LendingBorrowingERC721.ts --network localhost --show-stack-traces",
     "deploy:sepolia": "npx hardhat ignition deploy ./ignition/modules/LendingBorrowingERC721.ts --network sepolia --show-stack-traces",
     "deploy:linea_goerli": "npx hardhat ignition deploy ./ignition/modules/LendingBorrowingERC721.ts --network linea_goerli --show-stack-traces",
+    "deploy:sepolia_linea": "npx hardhat run scripts/deploy.ts --network linea_sepolia",
     "clean": "rm -rf ./artifacts ./typechain-typs ./cache"
   },
   "keywords": [],

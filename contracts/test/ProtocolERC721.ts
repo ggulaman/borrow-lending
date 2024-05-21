@@ -9,7 +9,7 @@ describe("AlphabetCollection", function () {
   let addr1: Signer;
   let addr2: Signer
   let addrs: Signer[];
-  const MAX_TOKENS = 27;
+  const MAX_TOKENS = 300;
 
 
   beforeEach(async function () {

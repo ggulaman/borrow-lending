@@ -168,7 +168,7 @@ export const useWeb3 = () => {
         signer
       );
 
-      const tx = await erc20Contract.approve(process.env.REACT_APP_FACTORY_LOAN_TOKEN_ADDRESS, 100);
+      const tx = await erc20Contract.approve(process.env.REACT_APP_FACTORY_LOAN_TOKEN_ADDRESS, ethers.parseEther("0.5"));
       await tx.wait();
     } catch (error) {
       console.error(`Transaction not executed with error: ${error}`)

@@ -6,8 +6,8 @@ import { useWeb3 } from './hooks/useWeb3';
 
 const LINEA_NETWORKS = {
   // '0xe708': "Linea",
-  // '0xe704': "Linea Goerli",
-  '0xaa36a7': "Sepolia"
+  '0xe705': "Linea Sepolia",
+  //'0xaa36a7': "Sepolia"
 }
 
 const App = () => {
@@ -15,7 +15,7 @@ const App = () => {
   const [account, setAccount] = useState<string>();
   const [provider, setProvider] = useState<BrowserProvider>();
   const [connectToLinea, setConnectedToLinea] = useState<boolean>();
-  const [network, setNetwork] = useState<'sepolia'>('sepolia');
+  const [network, setNetwork] = useState<'linea-sepolia'>('linea-sepolia');
   const { sdk, connected, chainId } = useSDK();
   const [userDepositedNFT, setUserDepositedNFT] = useState<boolean>(false);
   const [userOwnsNFT, setUserOwnsNFT] = useState<boolean>(false);
@@ -60,6 +60,8 @@ const App = () => {
 
   const callDepositNFT = async () => {
     provider && await depositNFT(provider);
+    account && setUserOwnsNFT(false);
+    account && setIsERC20Allowance(false);
     account && fetchUserDepositedNFT(account)
       .then(userDepositedNFT =>
         setUserDepositedNFT(!!userDepositedNFT)
@@ -95,7 +97,7 @@ const App = () => {
   // useEffects
   useEffect(() => {
     setConnectedToLinea(Object.keys(LINEA_NETWORKS).includes(chainId ?? ''))
-    Object.keys(LINEA_NETWORKS).includes(chainId ?? '') && setNetwork('sepolia');
+    Object.keys(LINEA_NETWORKS).includes(chainId ?? '') && setNetwork('linea-sepolia');
   }, [chainId, connected]
   )
 
@@ -222,9 +224,9 @@ const App = () => {
             <div>{account ? `Connected account: ${account}` : 'Please, click on Connect button'}</div>
           </>
         ) : connected ? (
-          <div>You're on the wrong network. Please switch to Sepolia.</div>
+          <div>You're on the wrong network. Please switch to Linea Sepolia.</div>
         ) : (
-          <div>Please connect your wallet to either Sepolia network.</div>
+          <div>Please connect your wallet to either Linea Sepolia network.</div>
         )}
       </div>
       {connectToLinea && account && ((userOwnsNFT || userDepositedNFT) ?

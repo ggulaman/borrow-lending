@@ -6,7 +6,7 @@ import "@typechain/hardhat"
 dotenv.config();
 const PRIVATE_KEY = process.env.PRIVATE_KEY ?? '0x'
 const SEPOLIA_RPC = process.env.SEPOLIA_RPC ?? ''
-const LINEA_GOERLI_RPC = process.env.LINEA_GOERLI_RPC ?? ''
+const LINEA_SEPOLIA_RPC = process.env.LINEA_SEPOLIA_RPC ?? ''
 
 const config: HardhatUserConfig = {
   defaultNetwork: "hardhat",
@@ -17,8 +17,8 @@ const config: HardhatUserConfig = {
       url: SEPOLIA_RPC,
       accounts: [PRIVATE_KEY]
     },
-    linea_goerli: {
-      url: LINEA_GOERLI_RPC,
+    linea_sepolia: {
+      url: LINEA_SEPOLIA_RPC,
       accounts: [PRIVATE_KEY]
     }
   },

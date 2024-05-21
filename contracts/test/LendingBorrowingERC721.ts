@@ -31,7 +31,7 @@ describe("LendingBorrowingERC721", function () {
       "ProtocolERC20", owner
     )) as ProtocolERC20__factory;
 
-    const totalSupply = (10 ** 9).toString()
+    const totalSupply = (18 * 10 ^ (6 + 18)).toString()
 
     protocolERC20 = await protocolERC20Factory.deploy(
       ethers.parseEther(totalSupply),
@@ -46,8 +46,8 @@ describe("LendingBorrowingERC721", function () {
     lendingBorrowingERC721 = await lendingBorrowingERC721Factory.deploy(protocolERC721Address, protocolERC20Address)
     lendingBorrowingERC721Address = await lendingBorrowingERC721.getAddress()
 
-    // Transfer ERC20 to lendingBorrowingERC721
-    await protocolERC20.connect(owner).transfer(lendingBorrowingERC721, 100);
+    // Transfer ERC20 to lendingBorrowingERC721f
+    await protocolERC20.connect(owner).transfer(lendingBorrowingERC721, 500000000000000000n);
 
   });
 
@@ -63,7 +63,7 @@ describe("LendingBorrowingERC721", function () {
 
     // Check if user received ERC20 tokens
     const balance = await protocolERC20.balanceOf(await user.getAddress());
-    expect(balance).to.equal(100);
+    expect(balance).to.equal(500000000000000000n);
   });
 
   it("Should not swap if no ERC721 tokens are owned by user", async function () {
@@ -82,7 +82,7 @@ describe("LendingBorrowingERC721", function () {
     await lendingBorrowingERC721.connect(user).swapToken();
 
     // Transfer ERC20 to lendingBorrowingERC721
-    await protocolERC20.connect(owner).transfer(lendingBorrowingERC721, 100);
+    await protocolERC20.connect(owner).transfer(lendingBorrowingERC721, 500000000000000000n);
 
     // Attempt to perform token swap again
     await expect(lendingBorrowingERC721.connect(user).swapToken()).to.be.revertedWith("Already deposited");
@@ -99,7 +99,7 @@ describe("LendingBorrowingERC721", function () {
     await lendingBorrowingERC721.connect(user).swapToken();
 
     // Allow lendingBorrowingERC721 to trasnfer ERC20 tokens
-    await protocolERC20.connect(user).approve(lendingBorrowingERC721, 5000);
+    await protocolERC20.connect(user).approve(lendingBorrowingERC721, 500000000000000000n);
 
     // Withdraw deposited tokens
     await lendingBorrowingERC721.connect(user).withdrawToken();

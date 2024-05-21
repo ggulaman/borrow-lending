@@ -291,7 +291,7 @@ export class InfuraService {
 
   async getHasERC20Allowance(owner: string, spender: string): Promise<boolean> {
     const total: number = await this.eRC20Contract.allowance(owner, spender);
-    return total >= 100;
+    return total >= 500000000000000000n;
   }
 
 
